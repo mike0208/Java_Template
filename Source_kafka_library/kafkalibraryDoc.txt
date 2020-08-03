@@ -1,0 +1,80 @@
+Apache Kafka-
+	 Distributed publish-subscribe msg system/msg broker which is DURABLE as data is persistent. 
+
+Common Terms in Kafka
+
+1. Record: Producer sends messages to Kafka in the form of records. A record is a key-value pair. 
+2.Topic: Producer writes a record on a topic and the consumer listens to it.Each Topic has partitions.
+3. Offset: A record in a partition has an offset associated with it. Offsets are committed to the broker asynchronously 
+   and synchronously.
+4. Producer: Creates a record and publishes it to the broker.
+5.Consumer: Consumes records from the broker
+
+KAFKA PRODUCER AND CONSUMER
+		To create a Kafka Producer and Consumerin general following properties have to be set-
+
+		*BOOTSTRAP_SERVERS_CONFIG: The Kafka broker's address.
+		*CLIENT_ID_CONFIG: Id of the producer so that the broker can determine the source of the request.
+		*KEY_SERIALIZER_CLASS_CONFIG: The class that will be used to serialize the key object. 
+			IF key is string, we use the StringSerializer class to serialize the key. 
+		*VALUE_SERIALIZER_CLASS_CONFIG: The class that will be used to serialize the value object.
+
+		*MAX_POLL_RECORDS_CONFIG: The max count of records that the consumer will fetch in one iteration.
+		*ENABLE_AUTO_COMMIT_CONFIG: When the consumer from a group receives a message it commit the offset of that record.
+ 
+LIBRARY Summary
+		IMessageBroker Interface- Declares the methods required for Connect, Publishing and subscribing, Close from 
+		broker
+
+Publishing (using library) 
+
+    The Producer calls 
+	1.Connect() using broker url-localhost:9092
+	2.Publish () using topic name and value and key
+	3.Close()
+
+Similarly for Subscriber 
+        1.Connect()
+	2.Subscribe()
+	3.Close()
+
+Methods....
+*All the producer and consumer props are included in library.IsConnect() function checks whether the server is connected or not
+* The producer calls the demo callback function which ensures server has acknowldged the data sent.
+* The consumer uses  poll() method which waits until timeout for records to arrive at the server.
+  Then the consumer commits the offset before closing the connection.Similary the consumer can subscribe from multiple topics.
+* KafkaFileProducer() and FileConsumer() also reads the contents of a file and publish to topic
+ and subscribe from a topic.
+
+	INSTALLING KAFKA..
+
+1. Follow the link to install kafka.
+
+https://www.learningjournal.guru/article/kafka/installing-kafka-on-windows/
+
+
+COMMANDS TO RUN ZOOKEEPER AND KAFKA
+
+1.GO TO KAFKA INSTALLATION DIRECTORY AND OPEN CMD
+
+2. START ZOOKEEPER -- 
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+3.OPEN NEW CMD AND START KAFKA--
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+4.FOR THE LIST OF TOPICS--
+
+	.\bin\windows\ --list --zookeeper localhost:2181
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
